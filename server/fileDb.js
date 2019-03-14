@@ -1,25 +1,29 @@
 const fs = require('fs');
 
 const fileName = './db.json';
-let data = [];
+let allMessages = [];
 
 module.exports = {
     init() {
         try {
             const fileContents = fs.readFileSync(fileName);
-            data = JSON.parse(fileContents);
+            allMessages = JSON.parse(fileContents);
         } catch {
-            data = []
+            allMessages = []
         }
     },
-    getItems() {
-        return data;
+    getLastMessages() {
+        try {
+            return allMessages.slice(-30);
+        } catch (e) {
+            console.log(e);
+        }
     },
-    addItem(item) {
-        data.push(item);
+    addMessage(item) {
+        allMessages.push(item);
         this.save()
     },
     save() {
-        fs.writeFileSync(fileName, JSON.stringify(data, null, 2));
+        fs.writeFileSync(fileName, JSON.stringify(allMessages, null, 2));
     }
 };
