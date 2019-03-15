@@ -1,4 +1,6 @@
 import React, {Component, Fragment} from 'react';
+import Header from "../../components/Header/Header";
+import Form from "../../components/Form/Form";
 
 const messagesUrl = 'http://146.185.154.90:8000/messages';
 const getMessagesByDate = 'http://146.185.154.90:8000/messages?datetime=';
@@ -65,10 +67,43 @@ class MainContainer extends Component {
         this.setState({message: event.target.value});
     };
 
+    sendClickHandler = () => {
+        if (this.state.author !== '' && this.state.message !== '') {
+
+            const data = new URLSearchParams();
+
+            data.set('author', this.state.author);
+            data.set('message', this.state.message);
+
+            return fetch(messagesUrl, {
+                method: 'post',
+                body: data,
+            }).then(this.setState({
+                author: '',
+                message: ''
+            })).catch(error => {
+                console.log(error);
+            });
+
+        } else {
+            alert('Please fill all fields!');
+        }
+    };
+
     render() {
         return (
             <Fragment>
-
+                <Header />
+                <div className="container">
+                </div>
+                <Form
+                    author={this.state.author}
+                    message={this.state.message}
+                    changeAuthor={(event) => this.changeAuthor(event)}
+                    changeMessage={(event) => this.changeMessage(event)}
+                    sendMessage={this.sendClickHandler}
+                >
+                </Form>
             </Fragment>
         );
     }

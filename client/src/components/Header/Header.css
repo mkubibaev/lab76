@@ -1,0 +1,18 @@
+header {
+    position: fixed;
+    width: 100%;
+    padding: 8px 0 10px;
+    top: 0;
+    left: 0;
+    text-align: center;
+    background: #242f3d;
+}
+
+header h4 {
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+    font-size: 20px;
+    color: #91a3b3;
+    line-height: 1;
+}
