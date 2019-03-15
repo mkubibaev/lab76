@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import Header from "../../components/Header/Header";
 import Form from "../../components/Form/Form";
+import Messages from "../../components/Messages/Messages";
 
 const messagesUrl = 'http://146.185.154.90:8000/messages';
 const getMessagesByDate = 'http://146.185.154.90:8000/messages?datetime=';
@@ -93,8 +94,9 @@ class MainContainer extends Component {
     render() {
         return (
             <Fragment>
-                <Header />
+                <Header/>
                 <div className="container">
+                    <Messages messages={this.state.messages}/>
                 </div>
                 <Form
                     author={this.state.author}

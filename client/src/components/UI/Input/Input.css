@@ -1,4 +1,4 @@
-.form-control {
+.control {
     background: transparent;
     border: none;
     border-radius: 0;
@@ -6,9 +6,10 @@
     padding: 0;
     outline: none;
     color: #fff;
+     width: 100%;
 }
 
-.form-control:focus {
+.control:focus {
     color: #fff;
     background: transparent;
     border-color: #6c7883;
