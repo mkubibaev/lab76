@@ -2,6 +2,8 @@ import React, {Component, Fragment} from 'react';
 import Header from "../../components/Header/Header";
 import Form from "../../components/Form/Form";
 import Messages from "../../components/Messages/Messages";
+import {connect} from "react-redux";
+import {authorHandler, messageHandler} from "../../store/action/messageAction";
 
 const messagesUrl = 'http://146.185.154.90:8000/messages';
 const getMessagesByDate = 'http://146.185.154.90:8000/messages?datetime=';
@@ -111,4 +113,19 @@ class MainContainer extends Component {
     }
 }
 
-export default MainContainer;
+const mapStateToProps = state => {
+    return {
+        messages: state.messages,
+        author: state.author,
+        message: state.message
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        authorHandler: event => dispatch(authorHandler(event.target.value)),
+        messageHandler: event => dispatch(messageHandler(event.target.value)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

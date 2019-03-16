@@ -9,13 +9,24 @@ export const fetchMessagesFailure = error => ({type: FETCH_MESSAGES_FAILURE, err
 export const authorHandler = text => ({type: AUTHOR, text});
 export const messageHandler = text => ({type: MESSAGE, text});
 
-export const createMessage = (messages) => {
+export const fetchMessage = () => {
     return dispatch => {
         dispatch(fetchMessagesRequest());
-        return axios.post('/messages', messages).then(response => {
+        return axios.get('/messages').then(response => {
                dispatch(fetchMessagesSuccess(response.data))
         }, error => {
            dispatch(fetchMessagesFailure(error));
+        });
+    };
+};
+
+export const createMessage = message => {
+    return dispatch => {
+        dispatch(fetchMessagesRequest());
+        return axios.post('/messages', message).then(response => {
+            dispatch(fetchMessagesSuccess(response.data))
+        }, error => {
+            dispatch(fetchMessagesFailure(error));
         });
     };
 };
