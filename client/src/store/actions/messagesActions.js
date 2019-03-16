@@ -16,11 +16,13 @@ export const createMessageRequest = () => ({type: CREATE_MESSAGE_REQUEST});
 export const createMessageSuccess = () => ({type: CREATE_MESSAGE_SUCCESS});
 export const createMessageFailure = error => ({type: CREATE_MESSAGE_FAILURE, error});
 
-export const fetchMessages = () => {
+export const fetchMessages = lastDate => {
+    const queryParam = lastDate ? `?datetime=${lastDate}` : '';
+
     return dispatch => {
         dispatch(fetchMessagesRequest());
 
-        axios.get('/messages').then(
+        axios.get('/messages' + queryParam).then(
             response => dispatch(fetchMessagesSuccess(response.data)),
             error => dispatch(fetchMessagesFailure(error))
         );

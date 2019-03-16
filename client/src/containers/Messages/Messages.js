@@ -8,15 +8,37 @@ import {createMessage, fetchMessages} from "../../store/actions/messagesActions"
 
 class Messages extends Component {
 
+    shouldComponentUpdate(nextProps) {
+        return nextProps.messages.length !== this.props.messages.length
+    }
+
     componentDidMount() {
         this.props.fetchMessages();
     }
 
-    // getNewMessages = (lastDate) => {
-    //     this.intervalId = setInterval(() => {
-    //         this.getAllMessages(lastDate)
-    //     }, 2000);
-    // };
+    componentDidUpdate(prevProps) {
+        console.log('updated');
+        console.log(this.props.messages);
+
+        const lastDate = this.props.messages[this.props.messages.length - 1].datetime;
+
+        clearInterval(this.intervalId);
+        this.fetchNewMessages(lastDate);
+
+        if (prevProps.messages.length !== this.props.messages.length) {
+            window.scroll(0, window.document.body.offsetHeight);
+        }
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.intervalId);
+    }
+
+    fetchNewMessages = lastDate => {
+        this.intervalId = setInterval(() => {
+            this.props.fetchMessages(lastDate)
+        }, 5000);
+    };
 
 
     render() {
@@ -47,7 +69,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-        fetchMessages: () => dispatch(fetchMessages()),
+        fetchMessages: lastDate => dispatch(fetchMessages(lastDate)),
         createMessage: message => dispatch(createMessage(message)),
 });
 
