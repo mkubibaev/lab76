@@ -1,4 +1,6 @@
 import {
+    CREATE_MESSAGE_FAILURE,
+    CREATE_MESSAGE_REQUEST, CREATE_MESSAGE_SUCCESS,
     FETCH_MESSAGES_FAILURE,
     FETCH_MESSAGES_REQUEST,
     FETCH_MESSAGES_SUCCESS,
@@ -6,7 +8,8 @@ import {
 
 const initialState = {
     messages: [],
-    loading: true
+    loading: true,
+    error: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -27,8 +30,27 @@ const reducer = (state = initialState, action) => {
         case FETCH_MESSAGES_FAILURE:
             return {
                 ...state,
-                error: action.error,
-                loading: false
+                loading: false,
+                error: action.error
+            };
+
+        case CREATE_MESSAGE_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+
+        case CREATE_MESSAGE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+            };
+
+        case CREATE_MESSAGE_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.error
             };
 
         default:
