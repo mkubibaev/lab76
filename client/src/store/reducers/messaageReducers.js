@@ -4,7 +4,7 @@ import {
     FETCH_MESSAGES_REQUEST,
     FETCH_MESSAGES_SUCCESS,
     MESSAGE
-} from "../action/actionTypes";
+} from "../actions/actionTypes";
 
 const initialState = {
     author: '',

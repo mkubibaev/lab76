@@ -6,3 +6,32 @@
     padding: 20px 0 15px;
     background: #1c2733;
 }
+
+.form .control {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #6c7883;
+    padding: 0;
+    outline: none;
+    color: #fff;
+    width: 100%;
+}
+
+.form .control:focus {
+    color: #fff;
+    background: transparent;
+    border-color: #6c7883;
+    outline: 0;
+    box-shadow: none;
+}
+
+.form .btn-primary {
+    background: #64cefd;
+    border: none;
+}
+
+.form .btn-primary:hover {
+    background: #64cefd;
+}
+

@@ -1,8 +1,5 @@
 import React from 'react';
 
-import Input from "../UI/Input/Input";
-import Button from "../UI/Button/Button";
-
 import './Form.css';
 
 const Form = props => {
@@ -11,19 +8,19 @@ const Form = props => {
             <div className="container">
                 <div className="form-row">
                     <div className="col-3">
-                        <Input placeholder="author"
-                               onValue={props.author}
-                               onInput={props.changeAuthor}
+                        <input placeholder="author"
+                               type="text"
+                               className="control"
                         />
                     </div>
                     <div className="col-8">
-                        <Input placeholder="message"
-                               onValue={props.message}
-                               onInput={props.changeMessage}
+                        <input placeholder="message"
+                               type="text"
+                               className="control"
                         />
                     </div>
                     <div className="col-1">
-                        <Button onSendClick={props.sendMessage} label="Send" type="primary" />
+                        <button className="btn btn-primary">Send</button>
                     </div>
                 </div>
             </div>

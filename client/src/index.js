@@ -1,26 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import MainContainer from './containers/MainContainer/MainContainer'
-import * as serviceWorker from './serviceWorker';
-
-import messageReducers from "./store/reducer/messaageReducers";
 import {Provider} from "react-redux";
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import * as serviceWorker from './serviceWorker';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
+
+import messageReducers from "./store/reducers/messaageReducers";
+import App from "./App";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(messageReducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
-const mainContainer = (
+const app = (
     <Provider store={store}>
-       <MainContainer />
+       <App />
     </Provider>
 );
 
-ReactDOM.render(mainContainer, document.getElementById('root'));
+ReactDOM.render(app, document.getElementById('root'));
 serviceWorker.unregister();
