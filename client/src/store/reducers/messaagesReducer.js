@@ -1,15 +1,12 @@
 import {
-    AUTHOR,
     FETCH_MESSAGES_FAILURE,
     FETCH_MESSAGES_REQUEST,
     FETCH_MESSAGES_SUCCESS,
-    MESSAGE
 } from "../actions/actionTypes";
 
 const initialState = {
-    author: '',
-    message: '',
-    messages: []
+    messages: [],
+    loading: true
 };
 
 const reducer = (state = initialState, action) => {
@@ -32,16 +29,6 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 error: action.error,
                 loading: false
-            };
-
-        case AUTHOR:
-            return {...state,
-                author: action.text
-            };
-
-        case MESSAGE:
-            return {...state,
-                message: action.text
             };
 
         default:

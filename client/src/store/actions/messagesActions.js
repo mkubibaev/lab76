@@ -1,21 +1,19 @@
 import axios from '../../axios-api';
 
-import {AUTHOR, FETCH_MESSAGES_FAILURE, FETCH_MESSAGES_REQUEST, FETCH_MESSAGES_SUCCESS, MESSAGE} from "./actionTypes";
+import {FETCH_MESSAGES_FAILURE, FETCH_MESSAGES_REQUEST, FETCH_MESSAGES_SUCCESS} from "./actionTypes";
 
 export const fetchMessagesRequest = () => ({type: FETCH_MESSAGES_REQUEST});
-export const fetchMessagesSuccess = message => ({type: FETCH_MESSAGES_SUCCESS, message});
+export const fetchMessagesSuccess = messages => ({type: FETCH_MESSAGES_SUCCESS, messages});
 export const fetchMessagesFailure = error => ({type: FETCH_MESSAGES_FAILURE, error});
 
-export const authorHandler = text => ({type: AUTHOR, text});
-export const messageHandler = text => ({type: MESSAGE, text});
-
-export const fetchMessage = () => {
+export const fetchMessages = () => {
     return dispatch => {
         dispatch(fetchMessagesRequest());
-        return axios.get('/messages').then(response => {
-               dispatch(fetchMessagesSuccess(response.data))
+
+        axios.get('/messages').then(response => {
+            dispatch(fetchMessagesSuccess(response.data))
         }, error => {
-           dispatch(fetchMessagesFailure(error));
+            dispatch(fetchMessagesFailure(error));
         });
     };
 };
