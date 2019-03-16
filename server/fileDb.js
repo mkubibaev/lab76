@@ -12,12 +12,11 @@ module.exports = {
             allMessages = []
         }
     },
+    getAllMessages() {
+        return allMessages;
+    },
     getLastMessages() {
-        try {
-            return allMessages.slice(-30);
-        } catch (e) {
-            console.log(e);
-        }
+        return allMessages.slice(-30);
     },
     addMessage(item) {
         allMessages.push(item);

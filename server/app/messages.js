@@ -13,7 +13,10 @@ router.get('/', (req, res) => {
         if (isNaN(date.getDate())) {
             return res.status(400).send({"error": "Incorrect datetime"});
         } else {
-            
+            const allMessages = fileDb.getAllMessages();
+            const newMessages = allMessages.filter(message => message.datetime > req.query.datetime);
+
+            res.send(newMessages);
         }
     } else {
         res.send(fileDb.getLastMessages());
