@@ -43,6 +43,7 @@ const reducer = (state = initialState, action) => {
         case CREATE_MESSAGE_SUCCESS:
             return {
                 ...state,
+                error: null,
                 loading: false,
             };
 
@@ -50,7 +51,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: false,
-                error: action.error
+                error: action.error.response.data.error
             };
 
         default:

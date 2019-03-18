@@ -9,7 +9,8 @@ import {createMessage, fetchMessages} from "../../store/actions/messagesActions"
 class Messages extends Component {
 
     shouldComponentUpdate(nextProps) {
-        return nextProps.messages.length !== this.props.messages.length
+        return nextProps.messages.length !== this.props.messages.length ||
+            nextProps.error !== this.props.error
     }
 
     componentDidMount() {
@@ -17,6 +18,7 @@ class Messages extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        console.log('list updated');
         const lastDate = this.props.messages[this.props.messages.length - 1].datetime;
 
         clearInterval(this.intervalId);
@@ -47,22 +49,26 @@ class Messages extends Component {
                     ))}
                 </div>
 
-                <Form onSubmit={this.props.createMessage}/>
+                <Form
+                    onSubmit={this.props.createMessage}
+                    error={this.props.error}
+                />
 
             </Fragment>
         );
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => {
+    return {
     messages: state.messages,
     loading: state.loading,
     error: state.error,
-});
+}};
 
 const mapDispatchToProps = dispatch => ({
-        fetchMessages: lastDate => dispatch(fetchMessages(lastDate)),
-        createMessage: message => dispatch(createMessage(message)),
+    fetchMessages: lastDate => dispatch(fetchMessages(lastDate)),
+    createMessage: message => dispatch(createMessage(message)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Messages);

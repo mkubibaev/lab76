@@ -29,6 +29,10 @@ class Form extends Component {
         return (
             <form className="form" onSubmit={this.submitHandler}>
                 <div className="container">
+                    {this.props.error
+                        ? <p className="text-warning border-bottom border-warning mb-3">{this.props.error}</p>
+                        : null
+                    }
                     <div className="form-row">
                         <div className="col-3">
                             <input placeholder="author"

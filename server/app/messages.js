@@ -25,7 +25,9 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    if (!req.body.message) {
+    if(!req.body.author && !req.body.message) {
+        return res.status(400).send({"error": "All fields are required!"});
+    } else if (!req.body.message) {
         return res.status(400).send({"error": "Message text is required!"});
     } else if (!req.body.author) {
         return res.status(400).send({"error": "Author is required!"});
