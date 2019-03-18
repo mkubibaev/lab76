@@ -23,7 +23,7 @@ const reducer = (state = initialState, action) => {
         case FETCH_MESSAGES_SUCCESS:
             return {
                 ...state,
-                messages: action.messages,
+                messages: [...state.messages].concat(action.messages),
                 loading: false
             };
 

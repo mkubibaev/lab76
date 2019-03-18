@@ -17,9 +17,6 @@ class Messages extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log('updated');
-        console.log(this.props.messages);
-
         const lastDate = this.props.messages[this.props.messages.length - 1].datetime;
 
         clearInterval(this.intervalId);
@@ -30,16 +27,11 @@ class Messages extends Component {
         }
     }
 
-    componentWillUnmount() {
-        clearInterval(this.intervalId);
-    }
-
     fetchNewMessages = lastDate => {
         this.intervalId = setInterval(() => {
             this.props.fetchMessages(lastDate)
-        }, 5000);
+        }, 2000);
     };
-
 
     render() {
         return (
